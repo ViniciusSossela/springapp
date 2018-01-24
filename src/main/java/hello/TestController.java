@@ -1,5 +1,6 @@
 package hello;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class TestController {
     private static final String template = "Hello, %s!";
 
 
+    @CrossOrigin
     @RequestMapping("/greeting")
     public Uepa greeting(@RequestParam(value="name", defaultValue="World") String name) {
         return new Uepa(counter.incrementAndGet(),
