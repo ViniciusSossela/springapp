@@ -5,6 +5,9 @@ import hello.data.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by vsossella on 27/01/18.
  */
@@ -17,9 +20,21 @@ public class UsuarioService {
 
     public Usuario doLogin(String username, String password) {
         try {
-            return usuarioRepository.findByUsernameAndPassword(username, password);
+            return usuarioRepository.findByUsername(username);
         } catch (Exception e) {
-            return null;
+            return new Usuario("vazio", "vazio");
+        }
+    }
+
+    public List<Usuario> findAll() {
+        try {
+            List<Usuario> usuarios = new ArrayList<>();
+            usuarioRepository.findAll().forEach(usuarios::add);
+            return usuarios;
+        } catch (Exception e) {
+            List<Usuario> usuarios = new ArrayList<>();
+            usuarios.add(new Usuario(e.getMessage(), ""));
+            return usuarios;
         }
     }
 
