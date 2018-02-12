@@ -22,7 +22,7 @@ public class UsuarioService {
         try {
             return usuarioRepository.findByUsername(username);
         } catch (Exception e) {
-            return new Usuario("vazio", "vazio");
+            return new Usuario(username, password + " " + e.getMessage());
         }
     }
 

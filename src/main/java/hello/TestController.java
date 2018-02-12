@@ -3,10 +3,7 @@ package hello;
 import hello.data.entity.Usuario;
 import hello.domain.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -25,11 +22,16 @@ public class TestController {
     private static final String template = "Hello, %s!";
 
 
+//    public Usuario login(@RequestParam(value = "name", defaultValue = "World") String name) {
+//        return usuarioService.doLogin("oi", "d22m03");
+//    }
+
     @CrossOrigin
-    @RequestMapping("/login")
-    public Usuario login(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return usuarioService.doLogin("oi", "d22m03");
+    @RequestMapping(name = "/login", method = RequestMethod.POST)
+    public Usuario login(@RequestBody Usuario input) {
+        return usuarioService.doLogin(input.getUsername(), input.getPassword());
     }
+
 
     @CrossOrigin
     @RequestMapping("/users")
