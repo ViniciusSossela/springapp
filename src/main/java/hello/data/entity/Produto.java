@@ -19,4 +19,36 @@ public class Produto {
     @OneToMany(mappedBy = "produto", fetch = FetchType.EAGER)
     private Set<TabelaPrecoProduto> tabelaPrecoProduto;
 
+    public Produto() {
+    }
+
+    public Produto(long id, String nome, Set<TabelaPrecoProduto> tabelaPrecoProduto) {
+        this.id = id;
+        this.nome = nome;
+        this.tabelaPrecoProduto = tabelaPrecoProduto;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Set<TabelaPrecoProduto> getTabelaPrecoProduto() {
+        return tabelaPrecoProduto;
+    }
+
+    public void setTabelaPrecoProduto(Set<TabelaPrecoProduto> tabelaPrecoProduto) {
+        this.tabelaPrecoProduto = tabelaPrecoProduto;
+    }
 }

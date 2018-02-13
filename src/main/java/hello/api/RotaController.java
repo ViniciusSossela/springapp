@@ -1,7 +1,7 @@
 package hello.api;
 
-import hello.data.entity.Cliente;
-import hello.domain.service.ClienteService;
+import hello.data.entity.Rota;
+import hello.domain.service.RotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/rota")
+public class RotaController {
 
     @Autowired
-    private ClienteService clienteService;
+    private RotaService service;
 
     @CrossOrigin
     @RequestMapping(name = "/", method = RequestMethod.POST)
-    public Cliente save(@RequestBody Cliente clienteInput) {
-        return clienteService.save(clienteInput);
+    public Rota save(@RequestBody Rota rotaInput) {
+        return service.save(rotaInput);
     }
-
 }

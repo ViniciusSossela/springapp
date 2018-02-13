@@ -1,7 +1,7 @@
 package hello.api;
 
-import hello.data.entity.Cliente;
-import hello.domain.service.ClienteService;
+import hello.data.entity.Pedido;
+import hello.domain.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/pedido")
+public class PedidoController {
 
     @Autowired
-    private ClienteService clienteService;
+    private PedidoService pedidoService;
 
     @CrossOrigin
     @RequestMapping(name = "/", method = RequestMethod.POST)
-    public Cliente save(@RequestBody Cliente clienteInput) {
-        return clienteService.save(clienteInput);
+    public Pedido save(@RequestBody Pedido pedidoInput) {
+        return pedidoService.save(pedidoInput);
     }
-
 }
