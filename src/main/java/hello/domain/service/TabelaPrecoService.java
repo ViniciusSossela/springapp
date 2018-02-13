@@ -1,5 +1,6 @@
 package hello.domain.service;
 
+import hello.data.entity.TabelaPreco;
 import hello.data.repository.TabelaPrecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,9 +10,13 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class TabeaPrecoService {
+public class TabelaPrecoService {
 
     @Autowired
     private TabelaPrecoRepository tabelaPrecoRepository;
+
+    public TabelaPreco save(TabelaPreco tabelaPreco) {
+        return tabelaPrecoRepository.save(tabelaPreco);
+    }
 
 }
