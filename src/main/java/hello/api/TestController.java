@@ -1,4 +1,4 @@
-package hello;
+package hello.api;
 
 import hello.data.entity.Usuario;
 import hello.domain.service.UsuarioService;
