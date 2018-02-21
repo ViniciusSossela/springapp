@@ -5,6 +5,9 @@ import hello.data.repository.TabelaPrecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by vsossella on 13/02/18.
  */
@@ -17,6 +20,12 @@ public class TabelaPrecoService {
 
     public TabelaPreco save(TabelaPreco tabelaPreco) {
         return tabelaPrecoRepository.save(tabelaPreco);
+    }
+
+    public List<TabelaPreco> findAll() {
+        List<TabelaPreco> tabelaPrecos = new ArrayList<>();
+        tabelaPrecoRepository.findAll().forEach(tabelaPrecos::add);
+        return tabelaPrecos;
     }
 
 }

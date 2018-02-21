@@ -1,5 +1,7 @@
 package hello.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -16,7 +18,8 @@ public class Produto {
 
     private String nome;
 
-    @OneToMany(mappedBy = "produto", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<TabelaPrecoProduto> tabelaPrecoProduto;
 
     public Produto() {

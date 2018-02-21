@@ -1,6 +1,7 @@
 package hello.api;
 
 import hello.data.entity.Produto;
+import hello.data.entity.TabelaPrecoProduto;
 import hello.domain.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

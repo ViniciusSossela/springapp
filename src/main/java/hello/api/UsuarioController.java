@@ -19,19 +19,19 @@ public class UsuarioController {
     private UsuarioService service;
 
     @CrossOrigin
-    @RequestMapping(name = "/login", method = RequestMethod.POST)
+    @PostMapping("/login")
     public Usuario login(@RequestBody Usuario input) {
         return service.doLogin(input.getUsername(), input.getPassword());
     }
 
     @CrossOrigin
-    @RequestMapping("/all")
+    @GetMapping("/all")
     public List<Usuario> users() {
         return service.findAll();
     }
 
     @CrossOrigin
-    @RequestMapping("/")
+    @PutMapping("/")
     public void user() {
         service.create("oi", "d22m03");
     }
