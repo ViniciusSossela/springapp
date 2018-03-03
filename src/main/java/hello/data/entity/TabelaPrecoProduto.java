@@ -1,6 +1,7 @@
 package hello.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -17,6 +18,7 @@ public class TabelaPrecoProduto {
 
     private double preco;
 
+    @JsonManagedReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tabela_preco_id")
     private TabelaPreco tabelaPreco;

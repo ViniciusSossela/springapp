@@ -30,4 +30,10 @@ public class ClienteController {
         return clienteService.findAll();
     }
 
+    @CrossOrigin
+    @RequestMapping("/rota/{rotaId}")
+    public List<Cliente> findAllByRota(@PathVariable("rotaId") Long rotaId) {
+        return clienteService.findByRota(rotaId);
+    }
+
 }

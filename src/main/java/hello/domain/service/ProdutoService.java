@@ -4,12 +4,13 @@ import hello.data.entity.Produto;
 import hello.data.entity.TabelaPrecoProduto;
 import hello.data.repository.ProdutoRepository;
 import hello.data.repository.TabelaPrecoRepository;
+import hello.domain.model.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by vsossella on 13/02/18.
@@ -24,14 +25,14 @@ public class ProdutoService {
     @Autowired
     private TabelaPrecoRepository tabelaPrecoRepository;
 
-    public Produto save(Produto produtoInput) {
+    public Produto save(ProdutoModel produtoModel) {
 
         Produto produtoNovo = new Produto();
-        produtoNovo.setNome(produtoInput.getNome());
+        produtoNovo.setNome(produtoModel.getNome());
         produtoNovo.setTabelaPrecoProduto(new HashSet<>());
 
 
-        produtoInput.getTabelaPrecoProduto().forEach(tabelaPrecoProduto ->
+        produtoModel.getTabelaPrecoProduto().forEach(tabelaPrecoProduto ->
                 {
                     TabelaPrecoProduto tabelaPrecoProdutoNova = new TabelaPrecoProduto();
                     tabelaPrecoProdutoNova.setPreco(tabelaPrecoProduto.getPreco());
@@ -46,5 +47,10 @@ public class ProdutoService {
         return produtoRepository.save(produtoNovo);
     }
 
+    public List<Produto> findAll() {
+        List<Produto> produtos = new ArrayList<>();
+        produtoRepository.findAll().forEach(produtos::add);
+        return produtos;
+    }
 
 }

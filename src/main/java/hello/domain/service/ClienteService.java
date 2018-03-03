@@ -1,7 +1,6 @@
 package hello.domain.service;
 
 import hello.data.entity.Cliente;
-import hello.data.entity.Usuario;
 import hello.data.repository.ClienteRepository;
 import hello.data.repository.RotaRepository;
 import hello.data.repository.TabelaPrecoRepository;
@@ -36,6 +35,16 @@ public class ClienteService {
     public List<Cliente> findAll() {
         List<Cliente> clientes = new ArrayList<>();
         clienteRepository.findAll().forEach(clientes::add);
+        return clientes;
+    }
+
+    public List<Cliente> findByRota(long rotaId) {
+        List<Cliente> clientes = new ArrayList<>();
+        clienteRepository.findAll().forEach(c -> {
+            if (c.getRota().getId() == rotaId) {
+                clientes.add(c);
+            }
+        });
         return clientes;
     }
 
