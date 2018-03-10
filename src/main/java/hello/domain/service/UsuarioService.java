@@ -20,9 +20,14 @@ public class UsuarioService {
 
     public Usuario doLogin(String username, String password) {
         try {
-            return usuarioRepository.findByUsername(username);
+            Usuario usuario = usuarioRepository.findByUsernameAndPassword(username, password);
+            if (usuario.getPassword().equals(password)) {
+                return usuario;
+            } else {
+                return null;
+            }
         } catch (Exception e) {
-            return new Usuario(username, password + " " + e.getMessage());
+            return null;
         }
     }
 
