@@ -9,6 +9,7 @@ import java.util.Set;
 public class ProdutoModel {
 
     private String nome;
+    private long produtoId;
     private Set<TabelaPrecoProdutoModel> tabelaPrecoProduto;
 
     public String getNome() {
@@ -17,6 +18,14 @@ public class ProdutoModel {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public long getProdutoId() {
+        return produtoId;
+    }
+
+    public void setProdutoId(long produtoId) {
+        this.produtoId = produtoId;
     }
 
     public Set<TabelaPrecoProdutoModel> getTabelaPrecoProduto() {

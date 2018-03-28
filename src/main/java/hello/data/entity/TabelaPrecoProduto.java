@@ -18,15 +18,22 @@ public class TabelaPrecoProduto {
 
     private double preco;
 
-    @JsonManagedReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tabela_preco_id")
-    private TabelaPreco tabelaPreco;
+//    @JsonManagedReference
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "tabela_preco_id")
+//    private TabelaPreco tabelaPreco;
+//
+//    @JsonBackReference
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "produtoId")
+//    private Produto produto;
+//    @ManyToOne
+//    @JoinColumn(name = "produto_id")
+//    private Produto produto;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "produto_id")
-    private Produto produto;
+    private long produtoId;
+
+    private long tabelaPrecoId;
 
     public TabelaPrecoProduto() {
     }
@@ -34,8 +41,10 @@ public class TabelaPrecoProduto {
     public TabelaPrecoProduto(long id, double preco, TabelaPreco tabelaPreco, Produto produto) {
         this.id = id;
         this.preco = preco;
-        this.tabelaPreco = tabelaPreco;
-        this.produto = produto;
+//        this.tabelaPreco = tabelaPreco;
+//        this.produto = produto;
+        tabelaPrecoId = tabelaPreco.getId();
+        produtoId = produto.getId();
     }
 
     public long getId() {
@@ -54,19 +63,35 @@ public class TabelaPrecoProduto {
         this.preco = preco;
     }
 
-    public TabelaPreco getTabelaPreco() {
-        return tabelaPreco;
+    public long getProdutoId() {
+        return produtoId;
     }
 
-    public void setTabelaPreco(TabelaPreco tabelaPreco) {
-        this.tabelaPreco = tabelaPreco;
+    public void setProdutoId(long produtoId) {
+        this.produtoId = produtoId;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public long getTabelaPrecoId() {
+        return tabelaPrecoId;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setTabelaPrecoId(long tabelaPrecoId) {
+        this.tabelaPrecoId = tabelaPrecoId;
     }
+
+    //    public TabelaPreco getTabelaPreco() {
+//        return tabelaPreco;
+//    }
+
+//    public void setTabelaPreco(TabelaPreco tabelaPreco) {
+//        this.tabelaPreco = tabelaPreco;
+//    }
+
+//    public Produto getProduto() {
+//        return produto;
+//    }
+//
+//    public void setProduto(Produto produto) {
+//        this.produto = produto;
+//    }
 }

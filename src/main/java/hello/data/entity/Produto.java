@@ -18,9 +18,9 @@ public class Produto {
 
     private String nome;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<TabelaPrecoProduto> tabelaPrecoProduto;
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "produto")
+//    private Set<TabelaPrecoProduto> tabelaPrecoProduto;
 
     public Produto() {
     }
@@ -28,7 +28,7 @@ public class Produto {
     public Produto(long id, String nome, Set<TabelaPrecoProduto> tabelaPrecoProduto) {
         this.id = id;
         this.nome = nome;
-        this.tabelaPrecoProduto = tabelaPrecoProduto;
+//        this.tabelaPrecoProduto = tabelaPrecoProduto;
     }
 
     public long getId() {
@@ -47,11 +47,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public Set<TabelaPrecoProduto> getTabelaPrecoProduto() {
-        return tabelaPrecoProduto;
-    }
-
-    public void setTabelaPrecoProduto(Set<TabelaPrecoProduto> tabelaPrecoProduto) {
-        this.tabelaPrecoProduto = tabelaPrecoProduto;
-    }
+//    public Set<TabelaPrecoProduto> getTabelaPrecoProduto() {
+//        return tabelaPrecoProduto;
+//    }
+//
+//    public void setTabelaPrecoProduto(Set<TabelaPrecoProduto> tabelaPrecoProduto) {
+//        this.tabelaPrecoProduto = tabelaPrecoProduto;
+//    }
 }
