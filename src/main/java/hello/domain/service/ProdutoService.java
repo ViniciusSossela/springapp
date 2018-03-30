@@ -4,13 +4,11 @@ import hello.data.entity.Produto;
 import hello.data.entity.TabelaPrecoProduto;
 import hello.data.repository.ProdutoRepository;
 import hello.data.repository.TabelaPrecoProdutoRepository;
-import hello.data.repository.TabelaPrecoRepository;
 import hello.domain.model.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,23 +44,20 @@ public class ProdutoService {
             );
             return produtoCreated;
         } else {
-            List<TabelaPrecoProduto> tabelaPrecoProdutosFromDb =
-                    findTabelaPrecoByProdutoId(produtoModel.getProdutoId());
+//            List<TabelaPrecoProduto> tabelaPrecoProdutosFromDb =
+//                    findTabelaPrecoByProdutoId(produtoModel.getProdutoId());
+
+            deleteTabelaPrecoByProduto(produtoModel.getProdutoId());
 
             produtoModel.getTabelaPrecoProduto().forEach(tabelaPrecoProdutoChanged -> {
 
-                tabelaPrecoProdutosFromDb.forEach(tabelaPrecoProduto -> {
-
-                    if (tabelaPrecoProduto.getTabelaPrecoId() ==
-                            tabelaPrecoProdutoChanged.getTabelaPreco().getId()) {
-                        tabelaPrecoProduto.setPreco(tabelaPrecoProdutoChanged.getPreco());
-                    }
-
-                });
+                TabelaPrecoProduto tabelaPrecoProdutoNova = new TabelaPrecoProduto();
+                tabelaPrecoProdutoNova.setPreco(tabelaPrecoProdutoChanged.getPreco());
+                tabelaPrecoProdutoNova.setTabelaPrecoId(tabelaPrecoProdutoChanged.getTabelaPreco().getId());
+                tabelaPrecoProdutoNova.setProdutoId(produtoModel.getProdutoId());
+                tabelaPrecoProdutoRepository.save(tabelaPrecoProdutoNova);
 
             });
-
-            tabelaPrecoProdutoRepository.save(tabelaPrecoProdutosFromDb);
         }
         return produtoNovo;
     }
@@ -71,6 +66,12 @@ public class ProdutoService {
         List<Produto> produtos = new ArrayList<>();
         produtoRepository.findAll().forEach(produtos::add);
         return produtos;
+    }
+
+    public void deleteTabelaPrecoByProduto(long produtoId) {
+        List<TabelaPrecoProduto> tabelaPrecoProdutosFromDb =
+                findTabelaPrecoByProdutoId(produtoId);
+        tabelaPrecoProdutoRepository.delete(tabelaPrecoProdutosFromDb);
     }
 
     public List<TabelaPrecoProduto> findTabelaPrecoByProdutoId(long produtoId) {
