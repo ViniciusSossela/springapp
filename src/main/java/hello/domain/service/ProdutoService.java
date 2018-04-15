@@ -33,20 +33,19 @@ public class ProdutoService {
             produtoNovo.setNome(produtoModel.getNome());
 
             Produto produtoCreated = produtoRepository.save(produtoNovo);
-            produtoModel.getTabelaPrecoProduto().forEach(tabelaPrecoProduto ->
-                    {
-                        TabelaPrecoProduto tabelaPrecoProdutoNova = new TabelaPrecoProduto();
-                        tabelaPrecoProdutoNova.setPreco(tabelaPrecoProduto.getPreco());
-                        tabelaPrecoProdutoNova.setTabelaPrecoId(tabelaPrecoProduto.getTabelaPreco().getId());
-                        tabelaPrecoProdutoNova.setProdutoId(produtoCreated.getId());
-                        tabelaPrecoProdutoRepository.save(tabelaPrecoProdutoNova);
-                    }
-            );
+            if (produtoModel.getTabelaPrecoProduto() != null) {
+                produtoModel.getTabelaPrecoProduto().forEach(tabelaPrecoProduto ->
+                        {
+                            TabelaPrecoProduto tabelaPrecoProdutoNova = new TabelaPrecoProduto();
+                            tabelaPrecoProdutoNova.setPreco(tabelaPrecoProduto.getPreco());
+                            tabelaPrecoProdutoNova.setTabelaPrecoId(tabelaPrecoProduto.getTabelaPreco().getId());
+                            tabelaPrecoProdutoNova.setProdutoId(produtoCreated.getId());
+                            tabelaPrecoProdutoRepository.save(tabelaPrecoProdutoNova);
+                        }
+                );
+            }
             return produtoCreated;
         } else {
-//            List<TabelaPrecoProduto> tabelaPrecoProdutosFromDb =
-//                    findTabelaPrecoByProdutoId(produtoModel.getProdutoId());
-
             deleteTabelaPrecoByProduto(produtoModel.getProdutoId());
 
             produtoModel.getTabelaPrecoProduto().forEach(tabelaPrecoProdutoChanged -> {
